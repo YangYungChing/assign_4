@@ -39,7 +39,7 @@ int playerMoveDuration = 15;
 boolean demoMode = false;
 
 int count=8;
-int lifeDistance=70;
+
 
 
 void setup() {
@@ -304,6 +304,7 @@ for(int i=6; i<count; i++ ){
      for(int i = 0; i < soilEmptyX1.length; i++){
   image(soilEmpty,soilEmptyX2[i],soilEmptyY[i]);
     }
+   
     
     
    
@@ -328,6 +329,18 @@ for(int i=6; i<count; i++ ){
 		// Groundhog
 
 		PImage groundhogDisplay = groundhogIdle;
+for(int i = 0; i < soilEmptyX1.length; i++){
+if((playerX==soilEmptyX1[i] && playerY==soilEmptyY[i])||(playerX==soilEmptyX2[i] && playerY==soilEmptyY[i])){
+  groundhogDisplay = groundhogDown;
+        if(playerMoveTimer == 0){
+          playerRow++;
+          playerY = SOIL_SIZE * playerRow;
+        }else{
+          playerY = (1f - float(playerMoveTimer) / playerMoveDuration + playerRow) * SOIL_SIZE;
+        }
+}
+        
+}
 
 		// If player is not moving, we have to decide what player has to do next
 		if(playerMoveTimer == 0){
